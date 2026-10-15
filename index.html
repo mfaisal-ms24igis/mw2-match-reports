@@ -3,6 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e4e5e2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141719" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Clean Sweep">
+<meta name="format-detection" content="telephone=no">
+<meta property="og:title" content="The Clean Sweep Tournament: Axis 5–0 Allies">
+<meta property="og:description" content="Five TDM games, one sweep. Scorecards, play-by-play and roast commentary.">
+<meta property="og:image" content="https://mfaisal-ms24igis.github.io/mw2-match-reports/icon-512.png">
+<meta property="og:url" content="https://mfaisal-ms24igis.github.io/mw2-match-reports/">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <title>The Clean Sweep Tournament</title>
 <meta name="description" content="Capt. Mandalorian's Axis vs Capt. TrOjaN's Allies: five Team Deathmatch games, one sweep. Play-by-play, scorecards and roast commentary.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -128,14 +142,78 @@ footer p{margin:0}
   .pbp{margin-left:48px}
   .pbp .t{left:-56px;width:40px;font-size:12px}
 }
+
+/* ---------- mobile-native layer ---------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:transparent}
+.sharebtn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);font:700 14px/1 var(--f-cond);letter-spacing:.1em;text-transform:uppercase;border-radius:2px;cursor:pointer}
+.sharebtn:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+.sharebtn svg{width:16px;height:16px}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);font:600 15px/1 var(--f-cond);letter-spacing:.06em;padding:12px 16px;border-radius:2px;z-index:30}
+.chart svg{min-width:0}
+.tabbar{display:none}
+@media (max-width:640px){
+  body{padding-block:16px calc(96px + env(safe-area-inset-bottom,0px));font-size:16px}
+  .wrap{gap:36px}
+  .top{align-items:center}
+  .top .eyebrow{display:none}
+  .board .roster{font-size:13px}
+  .team{font-size:22px}
+  .verdict{justify-content:flex-start}
+  .lede h1{font-size:32px}
+  /* match cards become a swipeable strip */
+  .cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-inline:-16px;padding:2px 16px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .cards::-webkit-scrollbar{display:none}
+  .mcard{flex:0 0 72%;scroll-snap-align:start;min-height:120px}
+  section{scroll-margin-top:12px}
+  .mtitle h2{font-size:38px}
+  .pbp h3{font-size:19px}
+  .pbp p{font-size:16px}
+  .final strong{font-size:20px}
+  summary{min-height:52px;display:flex;align-items:center}
+  .feed{columns:1;font-size:13px}
+  /* tables become stacked player cards */
+  .tbl{background:transparent;border:0;overflow:visible}
+  .tbl table{min-width:0 !important}
+  .tbl thead{display:none}
+  .tbl tbody{display:grid;gap:8px}
+  .tbl tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 10px;background:var(--panel);border:1px solid var(--rule);padding:12px 14px}
+  .tbl td{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:0;border:0;text-align:left;white-space:normal;font-size:17px;min-width:0}
+  .tbl td::before{content:attr(data-label);font:600 11px/1.1 var(--f-cond);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .tbl td.name{grid-column:1/-1;flex-direction:row;align-items:center;flex-wrap:wrap;font-size:22px;gap:4px}
+  .tbl td.name::before{display:none}
+  .tbl td.wide{grid-column:span 2}
+  .tbl td .bar{display:none}
+  .tbl tr.teamrow{grid-template-columns:1fr auto;background:transparent;border:0;border-bottom:2px solid currentColor;padding:14px 2px 6px}
+  .tbl tr.teamrow td::before{display:none}
+  .tbl tr.teamrow td:empty{display:none}
+  .tbl tr.teamrow td{font-size:18px}
+  /* the score-maths table keeps its rows */
+  .tbl.lineage tr{grid-template-columns:1fr auto auto;align-items:center}
+  .tbl.lineage td{font-size:15px}
+  .tbl.lineage td:first-child{font-size:15px}
+  .tbl.lineage td::before{display:none}
+  .tbl.lineage thead{display:none}
+  .awards{grid-template-columns:1fr}
+  /* bottom tab bar */
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--panel);border-top:1px solid var(--rule);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));gap:2px;overflow-x:auto;scrollbar-width:none;box-shadow:0 -6px 18px rgba(0,0,0,.08)}
+  .tabbar::-webkit-scrollbar{display:none}
+  .tabbar a{flex:1 0 auto;min-width:46px;min-height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;text-decoration:none;color:var(--muted);font:700 15px/1 var(--f-display);letter-spacing:.06em;border-radius:2px;padding:0 6px}
+  .tabbar a small{font:600 10px/1 var(--f-cond);letter-spacing:.08em;text-transform:uppercase}
+  .tabbar a[aria-current="true"]{color:var(--ink);background:var(--bg)}
+  .tabbar a[aria-current="true"] small{color:var(--hi)}
+  .tabbar a:focus-visible{outline:2px solid var(--hi);outline-offset:-2px}
+}
+@media (display-mode:standalone){ body{padding-top:calc(16px + env(safe-area-inset-top,0px))} }
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <header style="display:grid;gap:22px">
+  <header id="top" style="display:grid;gap:22px">
     <div class="top">
       <span class="tail">AXIS vs ALLIES · THE TOURNAMENT</span>
+      <button class="sharebtn" id="share" type="button" aria-label="Share this page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>Share</button>
       <span class="eyebrow">Team Deathmatch · 5 games · Rust, Scrapyard, Rust, Nuketown, Freighter</span>
     </div>
     <div class="board">
@@ -194,7 +272,7 @@ footer p{margin:0}
         <div class="side r"><span class="team allies">ALLIES</span></div>
       </div>
     </div>
-    <div class="tbl">
+    <div class="tbl lineage">
       <table style="min-width:520px">
         <thead><tr><th>How the 3v3 score was worked out</th><th class="axis">Axis</th><th class="allies">Allies</th></tr></thead>
         <tbody>
@@ -378,7 +456,7 @@ footer p{margin:0}
     <details><summary>Game 5 kill feed</summary><div class="feed" data-feed="4"></div></details>
   </section>
 
-  <section>
+  <section id="awards">
     <h2 class="sec">Tournament awards</h2>
     <div class="awards">
       <div class="award"><span class="eyebrow">Tournament MVP</span><span class="who axis">STRIKER</span><span class="num">133 K · 81 D · 1.64 K/D · 4 Predators</span><p>Top of the lobby in the first three games, a Predator in four of the five, and 40 kills on the Allied captain alone.</p></div>
@@ -395,6 +473,15 @@ footer p{margin:0}
   </footer>
 </div>
 
+<nav class="tabbar" aria-label="Jump to">
+  <a href="#top" data-t="top"><span>5–0</span><small>Top</small></a>
+  <a href="#m1" data-t="m1"><span>G1</span><small>Rust</small></a>
+  <a href="#m2" data-t="m2"><span>G2</span><small>Scrap</small></a>
+  <a href="#m3" data-t="m3"><span>G3</span><small>Rust</small></a>
+  <a href="#m4" data-t="m4"><span>G4</span><small>Nuke</small></a>
+  <a href="#m5" data-t="m5"><span>G5</span><small>Final</small></a>
+  <a href="#awards" data-t="awards"><span>★</span><small>Awards</small></a>
+</nav>
 <script>
 const SERIES=[{"id":"m1","map":"Rust","when":"2026-09-30 16:22","end":435,"team":{"STRIKER":"axis","Dr.Evil":"allies","MHD":"allies","TrOjaN":"allies","Mandalorian":"axis","Walking Dead":"axis"},"dmg":{"Dr.Evil":2417,"STRIKER":4224,"Mandalorian":2714,"Walking Dead":1324,"MHD":917,"TrOjaN":477},"feed":[[25,"Dr.Evil","STRIKER","AUG HBAR",""],[28,"STRIKER","Dr.Evil","ACR",""],[36,"Dr.Evil","Mandalorian","AUG HBAR","hs"],[44,"Dr.Evil","Mandalorian","AUG HBAR",""],[60,"STRIKER","MHD","M1014",""],[63,"Walking Dead","TrOjaN","L86 LSW",""],[68,"STRIKER","MHD","ACR",""],[71,"Mandalorian","Dr.Evil","UMP45",""],[80,"Mandalorian","Dr.Evil","UMP45",""],[86,"Walking Dead","MHD","L86 LSW",""],[87,"Dr.Evil","Mandalorian","AUG HBAR",""],[94,"MHD","Walking Dead","L86 LSW",""],[95,"Dr.Evil","Mandalorian","AUG HBAR",""],[108,"Mandalorian","Dr.Evil","M4A1",""],[122,"Walking Dead","MHD","L86 LSW",""],[131,"STRIKER","Dr.Evil","ACR",""],[146,"Walking Dead","MHD","L86 LSW",""],[149,"Mandalorian","Dr.Evil","M4A1","hs"],[157,"STRIKER","Dr.Evil","ACR",""],[158,"MHD","Mandalorian","L86 LSW",""],[163,"Walking Dead","MHD","L86 LSW",""],[169,"STRIKER","Dr.Evil","ACR",""],[171,"MHD","Walking Dead","L86 LSW",""],[179,"MHD","Mandalorian","L86 LSW",""],[189,"MHD","Walking Dead","L86 LSW",""],[192,"TrOjaN","STRIKER","Mini-Uzi","knife"],[204,"STRIKER","MHD","ACR",""],[204,"Walking Dead","TrOjaN","L86 LSW",""],[214,"Mandalorian","MHD","M4A1",""],[215,"Dr.Evil","Mandalorian","AUG HBAR",""],[217,"STRIKER","Dr.Evil","ACR",""],[222,"STRIKER","MHD","ACR",""],[223,"Walking Dead","TrOjaN","L86 LSW","hs"],[226,"Mandalorian","Dr.Evil","M4A1",""],[241,"Mandalorian","Dr.Evil","M4A1",""],[242,"STRIKER","MHD","ACR",""],[244,"STRIKER","TrOjaN","ACR",""],[248,"Dr.Evil","Mandalorian","AT4-HS",""],[254,"Dr.Evil","Walking Dead","AUG HBAR","hs"],[260,"TrOjaN","Mandalorian","L86 LSW",""],[265,"STRIKER","TrOjaN","Predator",""],[267,"Mandalorian","Dr.Evil","M4A1",""],[271,"Dr.Evil","Mandalorian","AUG HBAR",""],[274,"Walking Dead","MHD","L86 LSW",""],[276,"STRIKER","TrOjaN","ACR",""],[276,"Dr.Evil","STRIKER","AUG HBAR",""],[278,"Mandalorian","Dr.Evil","M4A1",""],[286,"MHD","Mandalorian","L86 LSW",""],[287,"STRIKER","TrOjaN","ACR","knife"],[289,"Walking Dead","MHD","L86 LSW",""],[294,"Mandalorian","Dr.Evil","M4A1",""],[297,"Mandalorian","TrOjaN","M4A1",""],[298,"Dr.Evil","Mandalorian","AUG HBAR",""],[298,"STRIKER","Dr.Evil","ACR",""],[304,"Mandalorian","MHD","M4A1",""],[306,"STRIKER","TrOjaN","ACR",""],[313,"Dr.Evil","STRIKER","AUG HBAR",""],[327,"TrOjaN","STRIKER","Mini-Uzi",""],[328,"MHD","Walking Dead","L86 LSW",""],[332,"Mandalorian","Dr.Evil","M4A1",""],[339,"Dr.Evil","STRIKER","AUG HBAR","hs"],[341,"Mandalorian","Dr.Evil","M4A1",""],[346,"Dr.Evil","Mandalorian","AT4-HS",""],[349,"Dr.Evil","Walking Dead","AUG HBAR",""],[351,"STRIKER","MHD","ACR",""],[358,"Mandalorian","MHD","M4A1",""],[359,"STRIKER","TrOjaN","ACR",""],[361,"Mandalorian","Dr.Evil","M4A1",""],[367,"Mandalorian","Dr.Evil","M4A1",""],[375,"Dr.Evil","STRIKER","AUG HBAR",""],[380,"STRIKER","TrOjaN","ACR",""],[384,"STRIKER","MHD","ACR",""],[385,"STRIKER","Dr.Evil","ACR",""],[388,"Mandalorian","TrOjaN","M4A1","knife"],[397,"Walking Dead","Dr.Evil","L86 LSW",""],[398,"TrOjaN","Mandalorian","Mini-Uzi",""],[401,"STRIKER","TrOjaN","M1014",""],[402,"Dr.Evil","STRIKER","AUG HBAR",""]]},{"id":"m2","map":"Scrapyard","when":"2026-10-14 16:31","end":639,"team":{"Walking Dead":"axis","Dr.Evil":"allies","STRIKER":"axis","Mandalorian":"axis","TrOjaN":"allies","MHD":"allies"},"dmg":{"Dr.Evil":1812,"STRIKER":4622,"TrOjaN":1134,"Mandalorian":1752,"Walking Dead":720,"MHD":732},"feed":[[33,"Dr.Evil","Walking Dead","M21 EBR",""],[40,"STRIKER","Dr.Evil","ACR",""],[44,"Dr.Evil","STRIKER","M21 EBR","hs"],[52,"STRIKER","Dr.Evil","ACR",""],[70,"Dr.Evil","Mandalorian","M21 EBR",""],[76,"TrOjaN","STRIKER","M16A4","hs"],[83,"Mandalorian","Dr.Evil","M16A4",""],[92,"STRIKER","MHD","ACR",""],[96,"STRIKER","Dr.Evil","ACR",""],[110,"Walking Dead","MHD","L86 LSW",""],[110,"TrOjaN","Walking Dead","M16A4",""],[111,"TrOjaN","STRIKER","M16A4",""],[122,"STRIKER","MHD","ACR","knife"],[130,"STRIKER","Dr.Evil","ACR",""],[134,"STRIKER","TrOjaN","ACR",""],[144,"Dr.Evil","STRIKER","M21 EBR",""],[144,"Mandalorian","Dr.Evil","M16A4",""],[160,"STRIKER","MHD","ACR",""],[168,"Mandalorian","Dr.Evil","M16A4",""],[175,"Dr.Evil","STRIKER","M21 EBR",""],[179,"Walking Dead","TrOjaN","L86 LSW",""],[182,"Mandalorian","MHD","M16A4","knife"],[185,"Mandalorian","Dr.Evil","M16A4","knife"],[216,"TrOjaN","STRIKER","M16A4",""],[239,"STRIKER","TrOjaN","ACR",""],[245,"TrOjaN","Walking Dead","M16A4",""],[253,"STRIKER","MHD","ACR",""],[267,"STRIKER","TrOjaN","ACR",""],[295,"Dr.Evil","STRIKER","M21 EBR",""],[304,"MHD","STRIKER","L86 LSW",""],[308,"Mandalorian","MHD","M16A4","hs"],[317,"Mandalorian","TrOjaN","M16A4",""],[321,"STRIKER","Dr.Evil","ACR","knife"],[330,"STRIKER","TrOjaN","ACR",""],[330,"Dr.Evil","STRIKER","M21 EBR",""],[340,"STRIKER","MHD","ACR",""],[374,"STRIKER","Dr.Evil","ACR",""],[389,"STRIKER","MHD","ACR",""],[390,"TrOjaN","STRIKER","M16A4",""],[391,"Mandalorian","Mandalorian","\u2014","suicide"],[408,"STRIKER","TrOjaN","ACR",""],[410,"Dr.Evil","STRIKER","M21 EBR",""],[417,"Walking Dead","MHD","L86 LSW",""],[433,"Walking Dead","MHD","L86 LSW",""],[440,"TrOjaN","Mandalorian","M16A4",""],[441,"STRIKER","TrOjaN","ACR",""],[444,"Walking Dead","MHD","L86 LSW",""],[446,"Dr.Evil","STRIKER","M21 EBR",""],[454,"STRIKER","Dr.Evil","ACR","knife"],[455,"MHD","Walking Dead","L86 LSW",""],[465,"MHD","STRIKER","L86 LSW",""],[475,"STRIKER","MHD","Semtex",""],[476,"Dr.Evil","Walking Dead","M21 EBR",""],[479,"Mandalorian","TrOjaN","M16A4","knife"],[480,"Dr.Evil","Mandalorian","M21 EBR",""],[499,"MHD","Walking Dead","L86 LSW",""],[501,"STRIKER","Dr.Evil","ACR",""],[509,"Mandalorian","TrOjaN","M16A4","hs"],[522,"STRIKER","TrOjaN","ACR",""],[523,"STRIKER","MHD","ACR",""],[524,"STRIKER","Dr.Evil","ACR",""],[531,"STRIKER","MHD","ACR",""],[541,"STRIKER","MHD","ACR",""],[550,"Mandalorian","MHD","M16A4",""],[555,"TrOjaN","Mandalorian","M16A4",""],[568,"STRIKER","Dr.Evil","Predator",""],[577,"Dr.Evil","STRIKER","M21 EBR",""],[588,"Mandalorian","TrOjaN","M16A4","knife"],[595,"Mandalorian","Dr.Evil","M16A4",""],[601,"STRIKER","TrOjaN","ACR",""],[603,"MHD","STRIKER","L86 LSW",""],[607,"Mandalorian","MHD","M16A4",""],[617,"STRIKER","MHD","ACR",""]]},{"id":"m3","map":"Rust","when":"2026-10-14 17:27","end":637,"team":{"Walking Dead":"axis","Dr.Evil":"allies","STRIKER":"axis","TrOjaN":"allies","MHD":"allies","Mandalorian":"axis"},"dmg":{"Dr.Evil":3812,"STRIKER":5117,"Walking Dead":1459,"MHD":2823,"Mandalorian":3515,"TrOjaN":1403},"feed":[[25,"Dr.Evil","Walking Dead","AUG HBAR",""],[27,"STRIKER","Dr.Evil","ACR",""],[30,"STRIKER","Dr.Evil","ACR",""],[45,"Walking Dead","TrOjaN","L86 LSW",""],[46,"MHD","STRIKER","L86 LSW",""],[49,"STRIKER","Dr.Evil","ACR","knife"],[52,"Mandalorian","MHD","SCAR-H",""],[56,"STRIKER","MHD","ACR","knife"],[57,"Dr.Evil","Walking Dead","AUG HBAR",""],[66,"STRIKER","TrOjaN","ACR",""],[69,"Dr.Evil","STRIKER","AUG HBAR",""],[74,"MHD","Walking Dead","L86 LSW",""],[76,"Dr.Evil","STRIKER","AUG HBAR",""],[78,"Mandalorian","Dr.Evil","SCAR-H",""],[83,"STRIKER","TrOjaN","ACR",""],[91,"Mandalorian","Dr.Evil","SCAR-H",""],[93,"TrOjaN","STRIKER","TAR-21",""],[96,"Mandalorian","Dr.Evil","SCAR-H",""],[103,"Dr.Evil","Mandalorian","AUG HBAR",""],[107,"STRIKER","Dr.Evil","ACR",""],[109,"STRIKER","TrOjaN","ACR",""],[117,"Dr.Evil","STRIKER","AUG HBAR","hs"],[134,"Dr.Evil","STRIKER","AUG HBAR",""],[138,"Dr.Evil","Mandalorian","AUG HBAR",""],[140,"Walking Dead","Dr.Evil","L86 LSW",""],[146,"TrOjaN","Walking Dead","TAR-21","hs"],[159,"MHD","STRIKER","L86 LSW",""],[160,"Mandalorian","Dr.Evil","SCAR-H",""],[171,"MHD","Mandalorian","L86 LSW",""],[171,"Dr.Evil","Walking Dead","AUG HBAR",""],[177,"STRIKER","MHD","ACR",""],[189,"STRIKER","TrOjaN","ACR",""],[189,"MHD","STRIKER","L86 LSW",""],[189,"Walking Dead","Dr.Evil","L86 LSW",""],[196,"Dr.Evil","Walking Dead","AUG HBAR",""],[200,"Walking Dead","TrOjaN","L86 LSW",""],[208,"Mandalorian","Dr.Evil","SCAR-H",""],[216,"MHD","Mandalorian","L86 LSW",""],[219,"Dr.Evil","STRIKER","AUG HBAR",""],[241,"TrOjaN","Walking Dead","TAR-21",""],[243,"MHD","Mandalorian","L86 LSW",""],[253,"STRIKER","Dr.Evil","Stun grenade",""],[254,"TrOjaN","Mandalorian","TAR-21",""],[256,"Walking Dead","TrOjaN","L86 LSW","hs"],[259,"MHD","Walking Dead","L86 LSW",""],[263,"Mandalorian","TrOjaN","Frag",""],[268,"STRIKER","MHD","ACR",""],[269,"Dr.Evil","Mandalorian","AUG HBAR",""],[275,"Walking Dead","TrOjaN","L86 LSW",""],[277,"Dr.Evil","Walking Dead","AUG HBAR",""],[279,"STRIKER","MHD","ACR",""],[284,"STRIKER","Dr.Evil","ACR",""],[290,"Dr.Evil","STRIKER","AUG HBAR",""],[294,"TrOjaN","Walking Dead","TAR-21",""],[296,"Mandalorian","MHD","SCAR-H","knife"],[298,"Mandalorian","Dr.Evil","SCAR-H",""],[302,"Mandalorian","MHD","SCAR-H",""],[306,"Mandalorian","TrOjaN","SCAR-H","knife"],[309,"STRIKER","Dr.Evil","ACR",""],[315,"STRIKER","Dr.Evil","ACR",""],[321,"STRIKER","Dr.Evil","ACR",""],[327,"Dr.Evil","STRIKER","AUG HBAR",""],[336,"STRIKER","MHD","ACR",""],[342,"MHD","Mandalorian","L86 LSW","hs"],[345,"STRIKER","MHD","ACR","hs"],[347,"Dr.Evil","STRIKER","AUG HBAR",""],[354,"Walking Dead","Dr.Evil","L86 LSW","hs"],[358,"TrOjaN","STRIKER","TAR-21",""],[359,"MHD","Mandalorian","L86 LSW",""],[364,"Mandalorian","Dr.Evil","Sentry gun",""],[364,"STRIKER","TrOjaN","ACR",""],[374,"Walking Dead","TrOjaN","L86 LSW",""],[377,"MHD","Mandalorian","L86 LSW",""],[379,"STRIKER","Dr.Evil","M1014",""],[380,"MHD","STRIKER","L86 LSW",""],[381,"Mandalorian","MHD","Sentry gun",""],[385,"Mandalorian","TrOjaN","M16A4",""],[397,"MHD","STRIKER","L86 LSW",""],[405,"Dr.Evil","STRIKER","AUG HBAR",""],[411,"MHD","Walking Dead","L86 LSW",""],[412,"STRIKER","Dr.Evil","ACR",""],[415,"Mandalorian","TrOjaN","M16A4",""],[417,"STRIKER","Dr.Evil","ACR",""],[422,"STRIKER","TrOjaN","ACR",""],[422,"Dr.Evil","STRIKER","AUG HBAR",""],[430,"Dr.Evil","Mandalorian","AUG HBAR",""],[431,"Walking Dead","TrOjaN","L86 LSW",""],[436,"STRIKER","MHD","ACR",""],[439,"STRIKER","TrOjaN","ACR",""],[444,"Mandalorian","Dr.Evil","M16A4",""],[445,"Dr.Evil","Mandalorian","Frag",""],[455,"Walking Dead","Dr.Evil","L86 LSW",""],[456,"TrOjaN","Walking Dead","TAR-21",""],[458,"MHD","Mandalorian","L86 LSW",""],[460,"STRIKER","MHD","ACR",""],[466,"TrOjaN","STRIKER","TAR-21",""],[472,"MHD","Walking Dead","L86 LSW",""],[477,"STRIKER","MHD","ACR",""],[483,"Dr.Evil","Walking Dead","AUG HBAR",""],[483,"TrOjaN","Mandalorian","TAR-21","knife"],[484,"STRIKER","MHD","ACR",""],[492,"Dr.Evil","Mandalorian","AUG HBAR",""],[494,"STRIKER","TrOjaN","M1014","knife"],[497,"Dr.Evil","STRIKER","AUG HBAR",""],[499,"Mandalorian","Dr.Evil","M16A4",""],[501,"Mandalorian","TrOjaN","M16A4",""],[515,"STRIKER","TrOjaN","ACR",""],[524,"STRIKER","MHD","ACR",""],[526,"Dr.Evil","Mandalorian","AUG HBAR",""],[530,"Dr.Evil","STRIKER","AUG HBAR",""],[534,"Walking Dead","MHD","L86 LSW",""],[547,"Mandalorian","MHD","M16A4","hs"],[551,"Dr.Evil","Mandalorian","AUG HBAR",""],[558,"MHD","Walking Dead","L86 LSW",""],[558,"Dr.Evil","STRIKER","AUG HBAR",""],[568,"Mandalorian","Dr.Evil","M16A4","knife"],[571,"MHD","Walking Dead","L86 LSW",""],[575,"STRIKER","Dr.Evil","ACR",""],[577,"Mandalorian","TrOjaN","M16A4","hs"],[580,"STRIKER","MHD","ACR",""],[588,"MHD","Walking Dead","L86 LSW","hs"],[591,"Mandalorian","MHD","M16A4","hs"],[593,"STRIKER","Dr.Evil","M1014",""],[600,"MHD","Mandalorian","L86 LSW",""],[600,"MHD","STRIKER","L86 LSW",""],[605,"TrOjaN","Walking Dead","TAR-21","hs"],[606,"Mandalorian","Dr.Evil","M16A4",""],[606,"STRIKER","MHD","ACR","hs"],[613,"Mandalorian","Dr.Evil","M16A4",""]]},{"id":"m4","map":"Nuketown","when":"2026-10-15 16:48","end":637,"team":{"STRIKER":"axis","Dr.Evil":"allies","TrOjaN":"allies","Mandalorian":"axis","MHD":"allies","Walking Dead":"axis"},"dmg":{"Dr.Evil":3304,"STRIKER":4457,"Mandalorian":2305,"MHD":1416,"Walking Dead":1077,"TrOjaN":1049},"feed":[[37,"Dr.Evil","STRIKER","AUG HBAR",""],[49,"Mandalorian","TrOjaN","M16A4",""],[52,"Mandalorian","Dr.Evil","M16A4",""],[53,"MHD","STRIKER","L86 LSW",""],[60,"Walking Dead","TrOjaN","L86 LSW",""],[61,"STRIKER","MHD","ACR grenade launcher",""],[66,"Walking Dead","Dr.Evil","L86 LSW",""],[79,"Dr.Evil","Mandalorian","AUG HBAR",""],[96,"TrOjaN","Mandalorian","ACR",""],[96,"STRIKER","Dr.Evil","ACR",""],[102,"Dr.Evil","STRIKER","AUG HBAR",""],[112,"STRIKER","Dr.Evil","ACR grenade launcher",""],[113,"Dr.Evil","STRIKER","Exploding car",""],[123,"MHD","Walking Dead","L86 LSW",""],[124,"STRIKER","TrOjaN","ACR grenade launcher",""],[130,"Dr.Evil","STRIKER","AUG HBAR",""],[134,"MHD","Mandalorian","L86 LSW",""],[162,"STRIKER","TrOjaN","ACR grenade launcher",""],[162,"MHD","STRIKER","L86 LSW",""],[163,"Mandalorian","MHD","M16A4 grenade launcher",""],[176,"Dr.Evil","STRIKER","AUG HBAR",""],[178,"Walking Dead","Dr.Evil","L86 LSW",""],[198,"Dr.Evil","STRIKER","AUG HBAR",""],[211,"TrOjaN","Mandalorian","FAMAS grenade launcher",""],[216,"MHD","STRIKER","L86 LSW",""],[228,"STRIKER","Dr.Evil","ACR grenade launcher",""],[233,"Dr.Evil","STRIKER","AUG HBAR",""],[244,"Dr.Evil","STRIKER","AUG HBAR",""],[245,"Mandalorian","TrOjaN","M16A4",""],[256,"STRIKER","Dr.Evil","ACR grenade launcher",""],[257,"Mandalorian","TrOjaN","M16A4","hs"],[269,"MHD","Mandalorian","L86 LSW",""],[275,"STRIKER","MHD","ACR grenade launcher","knife"],[306,"Dr.Evil","STRIKER","AUG HBAR",""],[307,"Mandalorian","Dr.Evil","SCAR-H",""],[316,"Mandalorian","MHD","SCAR-H",""],[319,"Walking Dead","Dr.Evil","L86 LSW",""],[320,"MHD","Mandalorian","L86 LSW",""],[322,"Walking Dead","MHD","L86 LSW",""],[322,"STRIKER","TrOjaN","ACR grenade launcher",""],[327,"Dr.Evil","Walking Dead","AUG HBAR",""],[332,"Mandalorian","MHD","SCAR-H",""],[334,"Mandalorian","TrOjaN","SCAR-H",""],[340,"Walking Dead","TrOjaN","L86 LSW","hs"],[342,"STRIKER","Dr.Evil","ACR",""],[344,"MHD","Mandalorian","L86 LSW",""],[350,"Mandalorian","TrOjaN","SCAR-H",""],[353,"Dr.Evil","Mandalorian","AUG HBAR",""],[359,"STRIKER","TrOjaN","Semtex",""],[359,"STRIKER","MHD","Semtex",""],[367,"Mandalorian","Dr.Evil","SCAR-H",""],[374,"STRIKER","TrOjaN","M1014","knife"],[383,"Dr.Evil","Mandalorian","AUG HBAR",""],[390,"Walking Dead","MHD","L86 LSW","hs"],[395,"TrOjaN","STRIKER","M1014",""],[405,"Dr.Evil","STRIKER","AUG HBAR",""],[406,"Mandalorian","Dr.Evil","SCAR-H",""],[413,"Mandalorian","Dr.Evil","SCAR-H",""],[421,"STRIKER","Dr.Evil","ACR",""],[425,"STRIKER","TrOjaN","ACR","hs"],[430,"Dr.Evil","Walking Dead","AUG HBAR",""],[432,"Dr.Evil","Mandalorian","AUG HBAR","hs"],[432,"MHD","STRIKER","L86 LSW",""],[442,"STRIKER","MHD","Predator",""],[447,"Dr.Evil","Mandalorian","AUG HBAR",""],[453,"TrOjaN","STRIKER","ACR",""],[454,"Dr.Evil","Mandalorian","AUG HBAR",""],[466,"Dr.Evil","STRIKER","AUG HBAR",""],[472,"STRIKER","Dr.Evil","ACR",""],[484,"Mandalorian","Dr.Evil","SCAR-H",""],[490,"STRIKER","MHD","ACR",""],[497,"Mandalorian","TrOjaN","SCAR-H","knife"],[508,"TrOjaN","Walking Dead","ACR","knife"],[508,"Dr.Evil","STRIKER","AUG HBAR",""],[513,"STRIKER","Dr.Evil","ACR",""],[526,"STRIKER","Dr.Evil","ACR",""],[533,"STRIKER","MHD","M1014",""],[534,"Dr.Evil","Mandalorian","AUG HBAR",""],[538,"STRIKER","Dr.Evil","M1014",""],[541,"TrOjaN","STRIKER","ACR",""],[544,"Dr.Evil","Walking Dead","AUG HBAR",""],[547,"Mandalorian","TrOjaN","SCAR-H",""],[554,"Dr.Evil","Walking Dead","AUG HBAR",""],[555,"MHD","STRIKER","L86 LSW",""],[557,"Mandalorian","TrOjaN","SCAR-H",""],[560,"Dr.Evil","Walking Dead","AUG HBAR",""],[563,"MHD","Mandalorian","L86 LSW",""],[571,"Dr.Evil","Mandalorian","AUG HBAR",""],[577,"Dr.Evil","Walking Dead","AUG HBAR",""],[594,"STRIKER","Dr.Evil","ACR",""],[600,"STRIKER","TrOjaN","ACR",""],[609,"Mandalorian","Dr.Evil","SCAR-H",""]]},{"id":"m5","map":"Freighter","when":"2026-10-15 17:00","end":639,"team":{"Mandalorian":"axis","Dr.Evil":"allies","TrOjaN":"allies","STRIKER":"axis","MHD":"allies","Walking Dead":"axis"},"dmg":{"Dr.Evil":3399,"STRIKER":5796,"MHD":1347,"Mandalorian":3337,"Walking Dead":1329,"TrOjaN":440},"feed":[[67,"Dr.Evil","Mandalorian","M21 EBR",""],[67,"STRIKER","TrOjaN","ACR",""],[85,"MHD","Mandalorian","L86 LSW",""],[98,"STRIKER","MHD","ACR",""],[98,"Dr.Evil","STRIKER","Thumper",""],[113,"Dr.Evil","STRIKER","M21 EBR",""],[141,"Mandalorian","TrOjaN","ACR",""],[143,"Mandalorian","Dr.Evil","ACR",""],[154,"Dr.Evil","STRIKER","M21 EBR",""],[160,"Mandalorian","MHD","ACR",""],[166,"Mandalorian","Dr.Evil","ACR",""],[167,"Mandalorian","MHD","ACR",""],[187,"STRIKER","TrOjaN","WA2000","hs"],[188,"Dr.Evil","Mandalorian","AUG HBAR","hs"],[194,"STRIKER","Dr.Evil","WA2000",""],[207,"Dr.Evil","Walking Dead","AUG HBAR",""],[213,"STRIKER","MHD","WA2000",""],[227,"MHD","STRIKER","L86 LSW",""],[231,"Dr.Evil","Walking Dead","AUG HBAR",""],[249,"Dr.Evil","STRIKER","AUG HBAR","hs"],[259,"Mandalorian","TrOjaN","SCAR-H","hs"],[263,"Mandalorian","Dr.Evil","SCAR-H",""],[272,"Mandalorian","TrOjaN","SCAR-H",""],[273,"Dr.Evil","Mandalorian","AUG HBAR",""],[286,"Dr.Evil","STRIKER","AUG HBAR",""],[297,"Dr.Evil","STRIKER","AUG HBAR","hs"],[298,"Walking Dead","MHD","L86 LSW",""],[310,"STRIKER","TrOjaN","WA2000",""],[311,"Dr.Evil","Mandalorian","AUG HBAR",""],[323,"Dr.Evil","Walking Dead","AUG HBAR",""],[328,"Mandalorian","Dr.Evil","SCAR-H",""],[338,"Mandalorian","Dr.Evil","SCAR-H",""],[340,"MHD","Mandalorian","L86 LSW","hs"],[341,"STRIKER","MHD","WA2000",""],[357,"Mandalorian","TrOjaN","SCAR-H",""],[368,"Mandalorian","Dr.Evil","SCAR-H",""],[369,"MHD","Mandalorian","L86 LSW",""],[375,"MHD","STRIKER","L86 LSW",""],[375,"Dr.Evil","Walking Dead","AUG HBAR",""],[382,"STRIKER","Dr.Evil","ACR","hs"],[397,"Mandalorian","Dr.Evil","SCAR-H",""],[398,"MHD","Mandalorian","L86 LSW",""],[398,"STRIKER","TrOjaN","ACR",""],[399,"STRIKER","MHD","ACR",""],[410,"Dr.Evil","Mandalorian","AUG HBAR",""],[414,"Walking Dead","MHD","L86 LSW",""],[423,"STRIKER","MHD","ACR",""],[435,"Walking Dead","TrOjaN","L86 LSW",""],[437,"Walking Dead","Dr.Evil","L86 LSW",""],[444,"STRIKER","MHD","M1014",""],[444,"STRIKER","Dr.Evil","M1014",""],[450,"TrOjaN","STRIKER","ACR",""],[451,"Mandalorian","Dr.Evil","SCAR-H",""],[462,"Walking Dead","Dr.Evil","L86 LSW",""],[485,"Dr.Evil","Walking Dead","AUG HBAR",""],[486,"Mandalorian","TrOjaN","SCAR-H",""],[489,"Dr.Evil","STRIKER","AUG HBAR",""],[493,"Mandalorian","MHD","Striker",""],[499,"Dr.Evil","STRIKER","AUG HBAR",""],[501,"MHD","Mandalorian","L86 LSW",""],[504,"STRIKER","Dr.Evil","ACR",""],[506,"Dr.Evil","STRIKER","Frag",""],[515,"STRIKER","MHD","ACR","hs"],[521,"Dr.Evil","Mandalorian","AUG HBAR",""],[523,"STRIKER","TrOjaN","ACR",""],[526,"Walking Dead","MHD","L86 LSW",""],[527,"Dr.Evil","Walking Dead","AUG HBAR",""],[528,"Dr.Evil","STRIKER","AUG HBAR",""],[534,"Mandalorian","Dr.Evil","SCAR-H",""],[539,"STRIKER","MHD","ACR",""],[548,"Dr.Evil","Mandalorian","AT4-HS",""],[552,"STRIKER","TrOjaN","ACR",""],[553,"MHD","STRIKER","L86 LSW",""],[554,"Mandalorian","MHD","SCAR-H",""],[556,"Walking Dead","Dr.Evil","L86 LSW",""],[561,"Mandalorian","TrOjaN","SCAR-H",""],[562,"STRIKER","MHD","Predator",""],[568,"TrOjaN","Mandalorian","M1014","hs"],[570,"Dr.Evil","STRIKER","AUG HBAR",""],[574,"Dr.Evil","Mandalorian","AUG HBAR",""],[583,"STRIKER","MHD","ACR",""],[588,"Dr.Evil","Walking Dead","AUG HBAR",""],[589,"STRIKER","TrOjaN","ACR",""],[596,"STRIKER","TrOjaN","ACR",""],[597,"MHD","Mandalorian","L86 LSW",""],[601,"Dr.Evil","STRIKER","AUG HBAR","hs"],[602,"Walking Dead","MHD","L86 LSW",""],[610,"Mandalorian","Dr.Evil","SCAR-H",""],[611,"MHD","Walking Dead","L86 LSW",""],[614,"Mandalorian","MHD","SCAR-H",""]]}];
 const CAPT={"Mandalorian":1,"TrOjaN":1};
@@ -420,7 +507,7 @@ SERIES.forEach((m,i)=>{
     const tot=tp.reduce((n,p)=>n+S[p].k,0);
     rows.push(`<tr class="teamrow ${team}"><td>${team.toUpperCase()}</td><td>${tot}</td><td colspan="8"></td></tr>`);
     tp.forEach(p=>{const s=S[p],diff=s.k-s.d,prim=Object.entries(s.w).sort((a,b)=>b[1]-a[1])[0][0];
-      rows.push(`<tr class="${p===top?"mvp":""}">${nameCell(p,team)}<td class="k"><span class="bar ${team}" style="width:${Math.round(s.k/maxK*56)}px"></span>${s.k}</td><td>${s.d}</td><td>${(s.k/Math.max(s.d,1)).toFixed(2)}</td><td class="${diff>0?"pos":"neg"}">${diff>0?"+":""}${diff}</td><td>${s.best}</td><td>${s.hs}</td><td>${s.kn}</td><td>${(m.dmg[p]||0).toLocaleString("en-GB")}</td><td style="font-family:var(--f-cond);font-size:16px">${prim}</td></tr>`)});
+      rows.push(`<tr class="${p===top?"mvp":""}">${nameCell(p,team)}<td class="k"><span class="bar ${team}" style="width:${Math.round(s.k/maxK*56)}px"></span>${s.k}</td><td>${s.d}</td><td>${(s.k/Math.max(s.d,1)).toFixed(2)}</td><td class="${diff>0?"pos":"neg"}">${diff>0?"+":""}${diff}</td><td>${s.best}</td><td>${s.hs}</td><td>${s.kn}</td><td>${(m.dmg[p]||0).toLocaleString("en-GB")}</td><td class="wide" style="font-family:var(--f-cond);font-size:16px">${prim}</td></tr>`)});
   });
   document.querySelector(`[data-sc="${i}"]`).innerHTML=rows.join("");
   document.querySelector(`[data-feed="${i}"]`).innerHTML=m.feed.map(([t,a,v,w,mod])=>a===v
@@ -441,26 +528,59 @@ SERIES.forEach((m,i)=>{
   });
   document.getElementById("lb").innerHTML=rows.join("");
 })();
-// charts
-document.querySelectorAll("svg[data-m]").forEach(svg=>{
+// charts: drawn at the container's real width so labels stay readable on phones
+function drawChart(svg){
   const m=SERIES[+svg.dataset.m],NS="http://www.w3.org/2000/svg";
-  const W=900,H=300,L=40,R=60,T=26,B=34,T_END=m.end;
+  const W=Math.max(320,Math.min(900,Math.round(svg.parentElement.clientWidth-24)||900));
+  const narrow=W<600,H=narrow?230:300,L=34,R=narrow?40:60,T=18,B=30,T_END=m.end;
+  svg.setAttribute("viewBox",`0 0 ${W} ${H}`);
+  while(svg.firstChild)svg.removeChild(svg.firstChild);
   const pts={axis:[[0,0]],allies:[[0,0]]},sc={axis:0,allies:0};
   m.feed.forEach(([t,a,v])=>{if(a===v)return;const tm=m.team[a];sc[tm]++;pts[tm].push([t,sc[tm]])});
   const Y_MAX=Math.ceil((Math.max(sc.axis,sc.allies)+1)/10)*10;
   const x=t=>L+(t/T_END)*(W-L-R),y=n=>H-B-(n/Y_MAX)*(H-T-B);
   const el=(n,a,txt)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e};
   const step=Y_MAX>50?20:10;
-  for(let n=0;n<=Y_MAX;n+=step){el("line",{x1:L,x2:W-R,y1:y(n),y2:y(n),stroke:"var(--rule)","stroke-width":1});el("text",{x:L-8,y:y(n)+4,"text-anchor":"end"},n)}
-  for(let s=0;s<=T_END;s+=120){el("text",{x:x(s),y:H-B+20,"text-anchor":"middle"},fmt(s))}
+  for(let n=0;n<=Y_MAX;n+=step){el("line",{x1:L,x2:W-R,y1:y(n),y2:y(n),stroke:"var(--rule)","stroke-width":1});el("text",{x:L-6,y:y(n)+4,"text-anchor":"end"},n)}
+  for(let t=0;t<=T_END;t+=narrow?180:120){el("text",{x:x(t),y:H-B+19,"text-anchor":"middle"},fmt(t))}
+  const ends={};
   ["allies","axis"].forEach(tm=>{
     pts[tm].push([T_END,sc[tm]]);
     let d=`M${x(0)},${y(0)}`;for(let i=1;i<pts[tm].length;i++)d+=`H${x(pts[tm][i][0]).toFixed(1)}V${y(pts[tm][i][1]).toFixed(1)}`;
-    el("path",{d,fill:"none",stroke:`var(--${tm})`,"stroke-width":2.5,"stroke-linejoin":"round"});
+    el("path",{d,fill:"none",stroke:`var(--${tm})`,"stroke-width":narrow?2.25:2.5,"stroke-linejoin":"round"});
     el("circle",{cx:x(T_END),cy:y(sc[tm]),r:4.5,fill:`var(--${tm})`});
-    el("text",{x:x(T_END)+10,y:y(sc[tm])+5,style:`fill:var(--${tm});font-weight:600;font-size:15px`},sc[tm]);
+    ends[tm]=y(sc[tm])+5;
   });
+  if(Math.abs(ends.axis-ends.allies)<16){ends.axis=Math.min(ends.axis,ends.allies)-8;ends.allies=ends.axis+16}
+  ["allies","axis"].forEach(tm=>el("text",{x:x(T_END)+8,y:ends[tm],style:`fill:var(--${tm});font-weight:600;font-size:14px`},sc[tm]));
+}
+const charts=[...document.querySelectorAll("svg[data-m]")];
+charts.forEach(drawChart);
+let rz;addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>charts.forEach(drawChart),150)});
+
+// tables: label every cell with its column name so phones can show them as cards
+document.querySelectorAll(".tbl table").forEach(tb=>{
+  const heads=[...tb.querySelectorAll("thead th")].map(th=>th.textContent.trim());
+  tb.querySelectorAll("tbody tr").forEach(tr=>{let i=0;[...tr.children].forEach(td=>{if(!td.dataset.label)td.dataset.label=heads[i]||"";i+=td.colSpan||1})});
 });
+
+// tab bar: highlight the section on screen
+const tabs=[...document.querySelectorAll(".tabbar a")];
+if("IntersectionObserver" in window&&tabs.length){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){tabs.forEach(a=>a.setAttribute("aria-current",a.dataset.t===e.target.id?"true":"false"));const on=tabs.find(a=>a.dataset.t===e.target.id);on&&on.scrollIntoView({block:"nearest",inline:"nearest"})}}),{rootMargin:"-45% 0px -50% 0px"});
+  tabs.forEach(a=>{const sec=document.getElementById(a.dataset.t);sec&&io.observe(sec)});
+}
+
+// share: native share sheet on phones (WhatsApp etc.), copy link elsewhere
+(function(){
+  const btn=document.getElementById("share");if(!btn)return;
+  const toast=msg=>{const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2200)};
+  btn.addEventListener("click",async()=>{
+    const data={title:document.title,text:"Axis 5–0 Allies. The full tournament report:",url:location.href.split("#")[0]};
+    if(navigator.share){try{await navigator.share(data)}catch(e){}return}
+    try{await navigator.clipboard.writeText(data.url);toast("Link copied")}catch(e){toast(data.url)}
+  });
+})();
 </script>
 
 </body>
